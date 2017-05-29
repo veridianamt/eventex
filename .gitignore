@@ -4,3 +4,4 @@
 *.sqlite3
 *.pcy
 __pycache__
+staticfiles
