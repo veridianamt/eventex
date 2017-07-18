@@ -3,7 +3,7 @@ from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
 
 
-class SubscrptionFormTest(TestCase):
+class SubscriptionFormTest(TestCase):
 
 
     def test_form_has_fields(self):
@@ -23,7 +23,12 @@ class SubscrptionFormTest(TestCase):
         form = self.make_validated_form(cpf = '1234')
         self.assertFormErrorCode(form,'cpf','length')
         #self.assertListEqual(['cpf'], list(form.errors))
-        
+
+
+    def test_name_must_be_capitalized(self):
+        """Name must be capitalized"""
+        form = self.make_validated_form(name = 'VERIDIANA mantecon')
+        self.assertEqual('Veridiana Mantecon', form.cleaned_data['name'])
 
     def assertFormErrorCode(self, form, field, code ):
         errors = form.errors.as_data()
